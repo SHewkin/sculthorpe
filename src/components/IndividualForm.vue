@@ -54,14 +54,14 @@
         v-model="newIndividual.mother"
         :items="mothers"
         label="Mother"
-        item-text="ID Number"
+        item-text="id_number"
         item-value="pk"
       ></v-select>
       <v-select
         v-model="newIndividual.father"
         :items="fathers"
         label="Father"
-        item-text="ID Number"
+        item-text="id_number"
         item-value="pk"
       ></v-select>
     </v-card-text>
@@ -75,10 +75,11 @@
 
 <script>
 import api_mixin from "@/plugins/api_mixin";
+import constants_mixin from "@/plugins/constants_mixin";
 
 export default {
   name: "IndividualForm",
-  mixins: [api_mixin],
+  mixins: [api_mixin, constants_mixin],
   props: {},
   data() {
     return {
@@ -95,10 +96,6 @@ export default {
         mother: null,
         father: null,
       },
-      genders: [
-        { value: "M", text: "Male" },
-        { value: "F", text: "Female" },
-      ],
     };
   },
   mounted() {
