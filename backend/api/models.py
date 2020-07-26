@@ -10,6 +10,9 @@ class Species(models.Model):
     animal = models.CharField(max_length=100, choices=ANIMAL_CHOICES)
     species = models.CharField(max_length=100)
 
+    def __str__(self):
+        return f"{self.animal}: {self.species}"
+
 
 class Individual(models.Model):
     GENDER_OPTIONS = (
@@ -21,8 +24,13 @@ class Individual(models.Model):
     id_number = models.CharField(max_length=50)
     gender = models.CharField(max_length=100, choices=GENDER_OPTIONS)
     date_of_birth = models.DateField()
-    parent = models.ForeignKey(
-        'self', null=True, blank=True, on_delete=models.CASCADE)
+    mother = models.ForeignKey(
+        'self', null=True, blank=True, on_delete=models.CASCADE,
+        limit_choices_to={"gender":"F"}, related_name="+")
+    father = models.ForeignKey(
+        'self', null=True, blank=True, on_delete=models.CASCADE,
+        limit_choices_to={"gender":"M"}, related_name="+")
+    species = models.ForeignKey(Species, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

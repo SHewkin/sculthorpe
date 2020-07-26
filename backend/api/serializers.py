@@ -5,13 +5,14 @@ from backend.api.models import Individual, Medication, MedicationType, Field, Sp
 class SpeciesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Species
-        fields = '__all__'
+        fields = ['pk', 'animal', 'species']
 
 
 class IndividualSerializer(serializers.ModelSerializer):
     class Meta:
         model = Individual
-        fields = '__all__'
+        fields = ['pk', 'name', 'holding_number', 'id_number', 'gender', 'date_of_birth',
+                  'mother', 'father', 'species']
 
 
 class MedicationSerializer(serializers.ModelSerializer):

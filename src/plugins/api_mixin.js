@@ -6,5 +6,11 @@ export default {
         this.individuals = response.data;
       });
     },
+    getSpecies: function() {
+      console.log('getting species')
+      this.axios.get("/api/species/").then((response) => {
+        this.species = response.data;
+      });
+    },
   },
 };

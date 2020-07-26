@@ -35,6 +35,13 @@
             <v-list-item-title>Medications</v-list-item-title>
           </v-list-item>
 
+          <v-list-item :to="{ name: 'breeds' }">
+            <v-list-item-icon>
+              <v-icon>mdi-home</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Breeds</v-list-item-title>
+          </v-list-item>
+
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
@@ -48,7 +55,7 @@ export default {
   data() {
     return {
       drawer: false,
-      group: null,
+      group: 1,
     };
   },
 };
