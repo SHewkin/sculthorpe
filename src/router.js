@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import VueDemo from '@/components/VueDemo'
-import Messages from '@/components/Messages'
+import Individuals from '@/components/Individuals.vue'
+import Medications from '@/components/Medications.vue'
 
 Vue.use(Router)
 
@@ -10,12 +10,12 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: VueDemo
+      component: Individuals
     },
     {
-      path: '/messages',
-      name: 'messages',
-      component: Messages
+      path: '/medications',
+      name: 'medications',
+      component: Medications
     }
   ]
 })
