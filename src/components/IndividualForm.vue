@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title>
-      Individuals
+      Add Individual
       <v-spacer></v-spacer>
     </v-card-title>
     <v-card-text>
@@ -99,7 +99,7 @@ export default {
     };
   },
   mounted() {
-    this.getSpecies();
+    this.getBreeds();
     this.getIndividuals();
   },
   computed: {

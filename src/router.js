@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Individuals from '@/components/Individuals.vue'
-import Medications from '@/components/Medications.vue'
+import MedicationTypes from '@/components/MedicationTypes.vue'
 import Breeds from '@/components/Breeds.vue'
 
 Vue.use(Router)
@@ -14,9 +14,9 @@ export default new Router({
       component: Individuals
     },
     {
-      path: '/medications',
-      name: 'medications',
-      component: Medications
+      path: '/medication_types',
+      name: 'medication_types',
+      component: MedicationTypes
     },
     {
       path: '/breeds',

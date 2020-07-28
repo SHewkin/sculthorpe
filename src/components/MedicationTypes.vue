@@ -1,14 +1,14 @@
 <template>
   <v-card>
     <v-card-title>
-      Breed
+      Medication Types
       <v-dialog v-model="dialog" persistent max-width="600px">
         <template v-slot:activator="{ on, attrs }">
           <v-btn color="primary" dark v-bind="attrs" v-on="on" text fab top x-small>
             <v-icon>mdi-plus</v-icon>
           </v-btn>
         </template>
-        <BreedForm @closeForm="closeForm" />
+        <MedicationTypeForm @closeForm="closeForm" />
       </v-dialog>
       <v-spacer></v-spacer>
 
@@ -20,18 +20,18 @@
         hide-details
       ></v-text-field>
     </v-card-title>
-    <v-data-table :headers="headers" :items="breeds" :search="search"></v-data-table>
+    <v-data-table :headers="headers" :items="medicationTypes" :search="search"></v-data-table>
   </v-card>
 </template>
 
 <script>
 import api_mixin from "@/plugins/api_mixin";
-import BreedForm from "@/components/BreedForm.vue";
+import MedicationTypeForm from "@/components/MedicationTypeForm.vue";
 export default {
-  name: "Breeds",
+  name: "MedicationTypes",
   mixins: [api_mixin],
   components: {
-    BreedForm,
+    MedicationTypeForm,
   },
   props: {},
   data() {
@@ -42,16 +42,16 @@ export default {
         { text: "Type", value: "species" },
         { text: "Breed", value: "breed" },
       ],
-      breeds: [],
+      medicationTypes: [],
     };
   },
   mounted() {
-    this.getBreeds();
+    this.getMedicationTypes();
   },
   methods: {
     closeForm: function () {
       this.dialog = false;
-      this.getBreeds();
+      this.getMedicationTypes();
     },
   },
 };

@@ -6,10 +6,16 @@ export default {
         this.individuals = response.data;
       });
     },
-    getSpecies: function() {
-      console.log('getting species')
-      this.axios.get("/api/species/").then((response) => {
-        this.species = response.data;
+    getBreeds: function() {
+      console.log('getting breeds')
+      this.axios.get("/api/breed/").then((response) => {
+        this.breeds = response.data;
+      });
+    },
+    getMedicationTypes: function() {
+      console.log('getting medication types')
+      this.axios.get("/api/medication_type/").then((response) => {
+        this.medicationTypes = response.data;
       });
     },
   },

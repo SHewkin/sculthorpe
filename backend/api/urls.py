@@ -4,9 +4,9 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register(r'individual', views.IndividualViewSet)
-router.register(r'medication', views.MedicationViewSet)
+router.register(r'treatment', views.TreatmentViewSet)
 router.register(r'medication_type', views.MedicationTypeViewSet)
-router.register(r'species', views.SpeciesViewSet)
+router.register(r'breed', views.BreedViewSet)
 router.register(r'field', views.FieldViewSet)
 
 # Wire up our API using automatic URL routing.

@@ -55,7 +55,7 @@ export default {
       search: "",
       dialog: false,
       headers: [
-        { text: "Breed", value: "species" },
+        { text: "Breed", value: "breed" },
         { text: "Name", value: "name" },
         { text: "Holding Number", value: "holding_number" },
         { text: "ID Number", value: "id_number" },

@@ -1,0 +1,26 @@
+[
+  {
+    "model": "api.breed",
+    "pk": 1,
+    "fields": {
+      "species": "S",
+      "breed": "Shetland"
+    }
+  },
+  {
+    "model": "api.breed",
+    "pk": 2,
+    "fields": {
+      "species": "S",
+      "breed": "Norfolk Horn"
+    }
+  },
+  {
+    "model": "api.breed",
+    "pk": 3,
+    "fields": {
+      "species": "S",
+      "breed": "Soway"
+    }
+  }
+]

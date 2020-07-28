@@ -1,23 +1,36 @@
 from rest_framework import serializers
-from backend.api.models import Individual, Medication, MedicationType, Field, Species
+from backend.api.models import Individual, Treatment, MedicationType, Field, Breed
 
 
-class SpeciesSerializer(serializers.ModelSerializer):
+class BreedSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Species
-        fields = ['pk', 'animal', 'species']
+        model = Breed
+        fields = ['pk', 'species', 'breed']
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['species'] = instance.get_species_display()
+
+        return representation
 
 
 class IndividualSerializer(serializers.ModelSerializer):
     class Meta:
         model = Individual
         fields = ['pk', 'name', 'holding_number', 'id_number', 'gender', 'date_of_birth',
-                  'mother', 'father', 'species']
+                  'mother', 'father', 'breed']
+
+    def to_representation(self, instance):
+        representation= super().to_representation(instance)
+        representation['gender'] = instance.get_gender_display()
+
+        return representation
 
 
-class MedicationSerializer(serializers.ModelSerializer):
+
+class TreatmentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Medication
+        model = Treatment
         fields = '__all__'
 
 

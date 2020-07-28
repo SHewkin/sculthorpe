@@ -2,16 +2,16 @@ from django.db import models
 from rest_framework import serializers
 
 
-class Species(models.Model):
-    ANIMAL_CHOICES = (
+class Breed(models.Model):
+    SPECIES_CHOICES = (
         ('S', 'Sheep'),
         ('C', 'Cow')
     )
-    animal = models.CharField(max_length=100, choices=ANIMAL_CHOICES)
-    species = models.CharField(max_length=100)
+    species = models.CharField(max_length=100, choices=SPECIES_CHOICES)
+    breed = models.CharField(max_length=500)
 
     def __str__(self):
-        return f"{self.animal}: {self.species}"
+        return f"{self.species}: {self.breed}"
 
 
 class Individual(models.Model):
@@ -30,7 +30,7 @@ class Individual(models.Model):
     father = models.ForeignKey(
         'self', null=True, blank=True, on_delete=models.CASCADE,
         limit_choices_to={"gender":"M"}, related_name="+")
-    species = models.ForeignKey(Species, on_delete=models.CASCADE)
+    breed = models.ForeignKey(Breed, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -41,7 +41,7 @@ class MedicationType(models.Model):
     description = models.TextField()
 
 
-class Medication(models.Model):
+class Treatment(models.Model):
     medication_type = models.ForeignKey(
         MedicationType, on_delete=models.CASCADE)
     amount_administered = models.FloatField()

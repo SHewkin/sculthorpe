@@ -1,9 +1,9 @@
 from django.contrib import admin
 
-from backend.api.models import Individual, Medication, MedicationType, Species, Field
+from backend.api.models import Individual, Treatment, MedicationType, Breed, Field
 
-admin.site.register(Species)
+admin.site.register(Breed)
 admin.site.register(Individual)
 admin.site.register(MedicationType)
-admin.site.register(Medication)
+admin.site.register(Treatment)
 admin.site.register(Field)
