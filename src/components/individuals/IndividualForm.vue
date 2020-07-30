@@ -6,12 +6,16 @@
     </v-card-title>
     <v-card-text>
       <v-select
-        v-model="newIndividual.species"
-        :items="species"
+        v-model="newIndividual.breed"
+        :items="breeds"
         label="Type"
-        item-text="species"
+        item-text="breed"
         item-value="pk"
-      ></v-select>
+      >
+        <template v-slot:item="{ item }">
+          <span>{{item.breed}} ({{item.species}})</span>
+        </template>
+      </v-select>
 
       <v-text-field v-model="newIndividual.name" label="Name"></v-text-field>
 
@@ -57,6 +61,7 @@
         item-text="id_number"
         item-value="pk"
       ></v-select>
+
       <v-select
         v-model="newIndividual.father"
         :items="fathers"
@@ -64,6 +69,15 @@
         item-text="id_number"
         item-value="pk"
       ></v-select>
+
+      <v-select
+        v-model="newIndividual.field"
+        :items="fields"
+        label="Field"
+        item-text="name"
+        item-value="pk"
+      ></v-select>
+      
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
@@ -80,14 +94,16 @@ import constants_mixin from "@/plugins/constants_mixin";
 export default {
   name: "IndividualForm",
   mixins: [api_mixin, constants_mixin],
-  props: {},
+  props: {
+    individual: null,
+  },
   data() {
     return {
       menu: false,
       individuals: [],
-      species: [],
+      breeds: [],
       newIndividual: {
-        species: null,
+        breed: null,
         name: null,
         holding_number: null,
         id_number: null,
@@ -95,12 +111,12 @@ export default {
         date_of_birth: null,
         mother: null,
         father: null,
+        field: null,
       },
     };
   },
   mounted() {
-    this.getBreeds();
-    this.getIndividuals();
+    this.loadInitialData();
   },
   computed: {
     mothers: function () {
@@ -115,21 +131,20 @@ export default {
     },
   },
   methods: {
+    loadInitialData: function () {
+      if (this.individual) {
+        this.newIndividual = this.individual;
+      }
+    },
     closeForm: function () {
       this.$emit("closeForm");
     },
     saveIndividual: function () {
-      console.log("posting");
-      this.axios
-        .post("/api/individual/", this.newIndividual)
-        .catch((response) => {
-          console.log("post failed");
-          console.log(response);
-        })
-        .then(() => {
-          console.log("posted");
-          this.closeForm();
-        });
+      if (this.individual) {
+        this.updateData("individual", this.individual.pk, this.newIndividual);
+      } else {
+        this.postData("individual", this.newIndividual);
+      }
     },
   },
 };

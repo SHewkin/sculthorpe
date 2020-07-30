@@ -5,7 +5,7 @@
       <v-spacer></v-spacer>
     </v-card-title>
     <v-card-text>
-      <v-select v-model="newBreed.species" :items="animals" label="Type"></v-select>
+      <v-select v-model="newBreed.species" :items="species" label="Type"></v-select>
 
       <v-text-field v-model="newBreed.breed" label="Breed"></v-text-field>
     </v-card-text>
@@ -22,9 +22,11 @@ import api_mixin from "@/plugins/api_mixin";
 import constants_mixin from "@/plugins/constants_mixin";
 
 export default {
-  name: "IndividualForm",
+  name: "BreedForm",
   mixins: [api_mixin, constants_mixin],
-  props: {},
+  props: {
+    breed: null,
+  },
   data() {
     return {
       menu: false,
@@ -35,25 +37,23 @@ export default {
     };
   },
   mounted() {
-    this.getBreeds();
-    this.getIndividuals();
+    this.loadInitialData();
   },
   methods: {
+    loadInitialData: function () {
+      if (this.breed) {
+        this.newBreed = this.breed;
+      }
+    },
     closeForm: function () {
       this.$emit("closeForm");
     },
     saveBreed: function () {
-      console.log("posting");
-      this.axios
-        .post("/api/breed/", this.newBreed)
-        .catch((response) => {
-          console.log("post failed");
-          console.log(response);
-        })
-        .then(() => {
-          console.log("posted");
-          this.closeForm();
-        });
+      if (this.breed) {
+        this.updateData("breed", this.breed.pk, this.newBreed);
+      } else {
+        this.postData("breed", this.newBreed);
+      }
     },
   },
 };

@@ -20,25 +20,32 @@
         <v-list-item-group
           active-class="deep-purple--text text--accent-4"
         >
-          <v-list-item :to="{ name: 'home' }">
+          <v-list-item to="/">
             <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
             </v-list-item-icon>
             <v-list-item-title>Home</v-list-item-title>
           </v-list-item>
           
-          <v-list-item :to="{ name: 'medication_types' }">
+          <v-list-item to="/medication_types">
             <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
             </v-list-item-icon>
             <v-list-item-title>Medication Types</v-list-item-title>
           </v-list-item>
 
-          <v-list-item :to="{ name: 'breeds' }">
+          <v-list-item to="/breeds">
             <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
             </v-list-item-icon>
             <v-list-item-title>Breeds</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item to="/fields">
+            <v-list-item-icon>
+              <v-icon>mdi-home</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Fields</v-list-item-title>
           </v-list-item>
 
         </v-list-item-group>

@@ -8,7 +8,7 @@
             <v-icon>mdi-plus</v-icon>
           </v-btn>
         </template>
-        <MedicationTypeForm @closeForm="closeForm" />
+        <MedicationTypeForm @closeForm="closeForm" :medication_type="editedMedicationType" />
       </v-dialog>
       <v-spacer></v-spacer>
 
@@ -20,13 +20,22 @@
         hide-details
       ></v-text-field>
     </v-card-title>
-    <v-data-table :headers="headers" :items="medicationTypes" :search="search"></v-data-table>
+    <v-data-table :headers="headers" :items="medicationTypes" :search="search">
+      <template v-slot:item.description="{ item }">
+        <span style="white-space: pre;">{{item.description}}</span>
+      </template>
+
+      <template v-slot:item.actions="{ item }">
+        <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
+        <v-icon small @click="deleteData('medication_type', item.pk)">mdi-delete</v-icon>
+      </template>
+    </v-data-table>
   </v-card>
 </template>
 
 <script>
 import api_mixin from "@/plugins/api_mixin";
-import MedicationTypeForm from "@/components/MedicationTypeForm.vue";
+import MedicationTypeForm from "@/components/medications/MedicationTypeForm.vue";
 export default {
   name: "MedicationTypes",
   mixins: [api_mixin],
@@ -38,20 +47,24 @@ export default {
     return {
       search: "",
       dialog: false,
+      editedMedicationType: null,
       headers: [
-        { text: "Type", value: "species" },
-        { text: "Breed", value: "breed" },
+        { text: "Name", value: "name" },
+        { text: "Description / Notes", value: "description" },
+        { text: "Actions", value: "actions" },
       ],
-      medicationTypes: [],
     };
-  },
-  mounted() {
-    this.getMedicationTypes();
   },
   methods: {
     closeForm: function () {
       this.dialog = false;
+      this.editedMedicationType = null;
       this.getMedicationTypes();
+    },
+
+    editItem(item) {
+      this.editedMedicationType = Object.assign({}, item);
+      this.dialog = true;
     },
   },
 };

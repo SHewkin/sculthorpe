@@ -14,6 +14,16 @@ class Breed(models.Model):
         return f"{self.species}: {self.breed}"
 
 
+class Field(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(null=True, blank=True)
+
+
+class MedicationType(models.Model):
+    name = models.CharField(max_length=300)
+    description = models.TextField(null=True, blank=True)
+
+
 class Individual(models.Model):
     GENDER_OPTIONS = (
         ('M', 'Male'),
@@ -26,29 +36,25 @@ class Individual(models.Model):
     date_of_birth = models.DateField()
     mother = models.ForeignKey(
         'self', null=True, blank=True, on_delete=models.CASCADE,
-        limit_choices_to={"gender":"F"}, related_name="+")
+        limit_choices_to={"gender": "F"}, related_name="+")
     father = models.ForeignKey(
         'self', null=True, blank=True, on_delete=models.CASCADE,
-        limit_choices_to={"gender":"M"}, related_name="+")
+        limit_choices_to={"gender": "M"}, related_name="+")
     breed = models.ForeignKey(Breed, on_delete=models.CASCADE)
+    field = models.ForeignKey(Field, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
 
 
-class MedicationType(models.Model):
-    name = models.CharField(max_length=300)
-    description = models.TextField()
+class Note(models.Model):
+    note = models.TextField()
+    individual = models.ForeignKey(Individual, on_delete=models.CASCADE)
 
 
 class Treatment(models.Model):
     medication_type = models.ForeignKey(
         MedicationType, on_delete=models.CASCADE)
-    amount_administered = models.FloatField()
+    amount_administered = models.CharField(max_length=200)
     date_of_administration = models.DateField()
     individual = models.ForeignKey(Individual, on_delete=models.CASCADE)
-
-
-class Field(models.Model):
-    name = models.CharField(max_length=100)
-    individuals = models.ManyToManyField(Individual)
