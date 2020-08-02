@@ -31,7 +31,7 @@ class Individual(models.Model):
     )
     name = models.CharField(max_length=100, null=True, blank=True)
     holding_number = models.CharField(max_length=50, blank=True, null=True)
-    id_number = models.CharField(max_length=50)
+    id_number = models.CharField(max_length=50, blank=True, null=True)
     gender = models.CharField(max_length=100, choices=GENDER_OPTIONS, blank=True, null=True)
     date_of_birth = models.DateField(blank=True, null=True)
     mother = models.ForeignKey(
