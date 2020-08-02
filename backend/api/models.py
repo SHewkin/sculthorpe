@@ -29,11 +29,11 @@ class Individual(models.Model):
         ('M', 'Male'),
         ('F', 'Female')
     )
-    name = models.CharField(max_length=100)
-    holding_number = models.CharField(max_length=50)
+    name = models.CharField(max_length=100, null=True, blank=True)
+    holding_number = models.CharField(max_length=50, blank=True, null=True)
     id_number = models.CharField(max_length=50)
-    gender = models.CharField(max_length=100, choices=GENDER_OPTIONS)
-    date_of_birth = models.DateField()
+    gender = models.CharField(max_length=100, choices=GENDER_OPTIONS, blank=True, null=True)
+    date_of_birth = models.DateField(blank=True, null=True)
     mother = models.ForeignKey(
         'self', null=True, blank=True, on_delete=models.CASCADE,
         limit_choices_to={"gender": "F"}, related_name="+")
